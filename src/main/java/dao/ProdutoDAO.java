@@ -47,7 +47,6 @@ public class ProdutoDAO
 
 			while (rs.next())
 			{
-
 				System.out.println(rs.getInt("id") + " | " +
 						rs.getString("nome") + " | R$ " +
 						rs.getDouble("preco"));
