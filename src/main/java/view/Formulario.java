@@ -33,7 +33,7 @@ public class Formulario implements Runnable
 
 			switch (i)
 			{
-				case 1:
+				case 0:
 					but.addActionListener(e ->
 					{
 						String nome = JOptionPane.showInputDialog(null, "Digite o nome", "Nome do produto", JOptionPane.QUESTION_MESSAGE);
@@ -42,14 +42,14 @@ public class Formulario implements Runnable
 						Produto produto = new Produto(nome, preco);
 
 						dao.inserir(produto);
-					};
+					});
 					break;
 
-				case 2:
+				case 1:
 					but.addActionListener(e -> dao.listar());
 					break;
 
-				case 3:
+				case 2:
 					but.addActionListener(e ->
 					{
 						int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID", "ID do produto", JOptionPane.QUESTION_MESSAGE));
@@ -57,16 +57,16 @@ public class Formulario implements Runnable
 						double preco = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o preço", "Preço do produto", JOptionPane.QUESTION_MESSAGE));
 
 						dao.atualizar(id, nome, preco);
-					};
+					});
 					break;
 
-				case 4:
+				case 3:
 					but.addActionListener(e ->
 					{
 						int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID", "ID do produto", JOptionPane.QUESTION_MESSAGE));
 
 						dao.excluir(id);
-					};
+					});
 					break;
 			}
 
