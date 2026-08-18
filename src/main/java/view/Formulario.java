@@ -15,7 +15,7 @@ public class Formulario implements Runnable
 
 		// Criar janela
 		JFrame frame = new JFrame("Crud JDBC");
-		frame.setSize(240, 300);
+		frame.setSize(254, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setResizable(false);
