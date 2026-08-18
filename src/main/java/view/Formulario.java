@@ -13,9 +13,10 @@ public class Formulario implements Runnable
 		ProdutoDAO dao = new ProdutoDAO();
 
 		JFrame frame = new JFrame("Crud JDBC");
-		frame.setSize(480, 300);
+		frame.setSize(240, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
+		frame.setResizable(false);
 
 		JButton[] buttons = {
 			new JButton("Cadastrar Produto"),
@@ -25,48 +26,67 @@ public class Formulario implements Runnable
 			new JButton("Sair")
 		};
 
-		int width = 100, height = 80;
+		int width = 192, height = 24;
 		for (int i = 0; i < buttons.length; i++)
 		{
 			JButton but = buttons[i];
-			but.setBounds(240 - width, 48 + (48 * i), width, height);
+			but.setBounds(120 - (width / 2), 12 + (48 * i), width, height);
 
 			switch (i)
 			{
 				case 0:
 					but.addActionListener(e ->
 					{
-						String nome = JOptionPane.showInputDialog(null, "Digite o nome", "Nome do produto", JOptionPane.QUESTION_MESSAGE);
-						double preco = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o preço", "Preço do produto", JOptionPane.QUESTION_MESSAGE));
+						try {
+							String nome = JOptionPane.showInputDialog(null, "Digite o nome", "Nome do produto", JOptionPane.QUESTION_MESSAGE);
+							double preco = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o preço", "Preço do produto", JOptionPane.QUESTION_MESSAGE).replace(',', '.'));
 
-						Produto produto = new Produto(nome, preco);
+							Produto produto = new Produto(nome, preco);
 
-						dao.inserir(produto);
+							dao.inserir(produto);
+						}
+						catch (Exception erro)
+						{
+							// Usuário provavelmente só fechou a janela
+						}
 					});
 					break;
 
 				case 1:
-					but.addActionListener(e -> dao.listar());
+					but.addActionListener(e -> dao.listarSwing());
 					break;
 
 				case 2:
 					but.addActionListener(e ->
 					{
-						int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID", "ID do produto", JOptionPane.QUESTION_MESSAGE));
-						String nome = JOptionPane.showInputDialog(null, "Digite o nome", "Nome do produto", JOptionPane.QUESTION_MESSAGE);
-						double preco = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o preço", "Preço do produto", JOptionPane.QUESTION_MESSAGE));
+						try {
+							int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do produto para atualizar", "ID do produto", JOptionPane.QUESTION_MESSAGE));
+							String nome = JOptionPane.showInputDialog(null, "Digite o novo nome", "Nome do produto", JOptionPane.QUESTION_MESSAGE);
+							double preco = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o novo preço", "Preço do produto", JOptionPane.QUESTION_MESSAGE).replace(',', '.'));
 
-						dao.atualizar(id, nome, preco);
+							dao.atualizar(id, nome, preco);
+
+							new JDialog().setTitle("Successo!");
+						}
+						catch(Exception erro) {
+						}
 					});
 					break;
 
 				case 3:
 					but.addActionListener(e ->
 					{
-						int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID", "ID do produto", JOptionPane.QUESTION_MESSAGE));
-
-						dao.excluir(id);
+						try {
+							int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do produto para excluir", "ID do produto", JOptionPane.QUESTION_MESSAGE));
+							dao.excluir(id);
+						}
+						catch(Exception erro) {
+						}
 					});
+					break;
+
+				case 4:
+					but.addActionListener(e -> frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING)));
 					break;
 			}
 
