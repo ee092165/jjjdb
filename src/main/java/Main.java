@@ -14,27 +14,33 @@ public class Main
 
 		do
 		{
-			System.out.println("\n==============================");
-			System.out.println(" CRUD DE PRODUTOS");
-			System.out.println("==============================");
-			System.out.println("1 - Cadastrar Produto");
-			System.out.println("2 - Listar Produtos");
-			System.out.println("3 - Atualizar Produto");
-			System.out.println("4 - Excluir Produto");
-			System.out.println("5 - Sair");
-			System.out.print("Escolha uma opção: ");
+			System.out.print(
+				"\n==============================" +
+				"\n CRUD DE PRODUTOS" +
+				"\n==============================" +
+				"\n1 - Cadastrar Produto" +
+				"\n2 - Listar Produtos" +
+				"\n3 - Atualizar Produto" +
+				"\n4 - Excluir Produto" +
+				"\n5 - Sair" +
+				"\nEscolha uma opção: "
+			);
 
 			opcao = sc.nextInt();
 			sc.nextLine();
+
+			int id;
+			String nome;
+			double preco;
 
 			switch (opcao)
 			{
 				case 1:
 					System.out.print("Nome: ");
-					String nome = sc.nextLine();
+					nome = sc.nextLine();
 
 					System.out.print("Preço: ");
-					double preco = sc.nextDouble();
+					preco = sc.nextDouble();
 
 					Produto produto = new Produto(nome, preco);
 
@@ -47,7 +53,7 @@ public class Main
 
 				case 3:
 					System.out.print("ID do produto: ");
-					int id = sc.nextInt();
+					id = sc.nextInt();
 					sc.nextLine();
 
 					System.out.print("Novo nome: ");
