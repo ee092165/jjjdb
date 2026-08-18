@@ -32,7 +32,7 @@ public class Conexao
 		catch (SQLException e)
 		{
 			JOptionPane.showMessageDialog(null,
-					"Não pode conectar ao banco SQL na primeira tentativa.",
+					"Não pôde conectar ao banco SQL na primeira tentativa.\nO aplicativo pode não funcionar.",
 					"Erro",
 					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
