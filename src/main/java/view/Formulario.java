@@ -1,5 +1,6 @@
 package view;
 
+import connection.Conexao;
 import dao.ProdutoDAO;
 import model.Produto;
 
@@ -12,11 +13,16 @@ public class Formulario implements Runnable
 	{
 		ProdutoDAO dao = new ProdutoDAO();
 
+		// Criar janela
 		JFrame frame = new JFrame("Crud JDBC");
 		frame.setSize(240, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setResizable(false);
+
+		// Tentar conectar ao banco SQL uma vez para verificar se funciona. Se não funcionar um diálogo irá aparecer
+		// Lembrando que se o banco ir online após essa mensagem, o aplicativo irá funcionar ainda
+		Conexao.swingTestar();
 
 		JButton[] buttons = {
 			new JButton("Cadastrar Produto"),
@@ -26,12 +32,14 @@ public class Formulario implements Runnable
 			new JButton("Sair")
 		};
 
+		// Adicionar botões em um loop
 		int width = 192, height = 24;
 		for (int i = 0; i < buttons.length; i++)
 		{
 			JButton but = buttons[i];
 			but.setBounds(120 - (width / 2), 12 + (48 * i), width, height);
 
+			// Funções dos botões
 			switch (i)
 			{
 				case 0:
@@ -47,7 +55,7 @@ public class Formulario implements Runnable
 						}
 						catch (Exception erro)
 						{
-							// Usuário provavelmente só fechou a janela
+							// Usuário provavelmente só fechou a janela.
 						}
 					});
 					break;
@@ -68,8 +76,7 @@ public class Formulario implements Runnable
 
 							new JDialog().setTitle("Successo!");
 						}
-						catch(Exception erro) {
-						}
+						catch(Exception erro) {}
 					});
 					break;
 
@@ -80,8 +87,7 @@ public class Formulario implements Runnable
 							int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do produto para excluir", "ID do produto", JOptionPane.QUESTION_MESSAGE));
 							dao.excluir(id);
 						}
-						catch(Exception erro) {
-						}
+						catch(Exception erro) {}
 					});
 					break;
 

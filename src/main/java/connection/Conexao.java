@@ -1,5 +1,6 @@
 package connection;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class Conexao
@@ -20,6 +21,22 @@ public class Conexao
 			e.printStackTrace();
 			return null;
 		}
+	}
 
+	public static Connection swingTestar()
+	{
+		try
+		{
+			return DriverManager.getConnection(URL, USUARIO, SENHA);
+		}
+		catch (SQLException e)
+		{
+			JOptionPane.showMessageDialog(null,
+					"Não pode conectar ao banco SQL na primeira tentativa.",
+					"Erro",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
